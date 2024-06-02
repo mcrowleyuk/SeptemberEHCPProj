@@ -15,18 +15,19 @@ EHCP::EHCP()
 
 EHCP& EHCP::operator=(EHCP&& myEHCP)
 {
-	// move temporary right into left
+
 	cout << "In the move assignment operator";
 
-	//steal the resources from temporary myEHCP and reallocate to this
-	
-	std::move(myEHCP.strEntryB.begin(), myEHCP.strEntryB.end(), strEntryB.begin());
+	if (&myEHCP != this)
+	{	
+		//steal the resources from temporary myEHCP and reallocate to 'this'
+		// move temporary right into left
 
+		std::move(myEHCP.strEntryB.begin(), myEHCP.strEntryB.end(), strEntryB.begin());
+	}
 	return *this;
 	
 } 
-
-
 
 
 EHCP::~EHCP()
@@ -49,7 +50,7 @@ EHCP::~EHCP()
 		
 	
 		
-		strEntryB.clear(); // does the same!#
+		strEntryB.clear(); // does the same so should not need the above at all! But for avoidance of doubt
 	}
 	catch(...)
 	{
@@ -62,7 +63,14 @@ EHCP::~EHCP()
 }
 const string& EHCP::getSectionB() const
 {
-	return *strEntryB.begin();
+	if (strEntryB.size()!=0)
+	{
+		return *strEntryB.begin();
+	}
+	else
+	{
+		//return this->strEntryB; // Need to resolve what to return here
+	}
 }
 void EHCP::AddSectionB(string& entryB)
 {

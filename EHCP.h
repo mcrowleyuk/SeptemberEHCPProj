@@ -24,7 +24,7 @@ class EHCP
 	
 	EHCP& operator=(EHCP& myEHCP); // assignment overload
 	
-	EHCP& operator=(EHCP&& myEHCP); // move assignment deleted
+	EHCP& operator=(EHCP&& myEHCP); // move assignment
 	
 	void AddSectionB(string& entryB);
 	
